@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  EMPLOYEE
+  ADMIN
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  createdAt DateTime @default(now())
+
+  users User[]
+
+  @@index([createdAt])
+}
+
+model User {
+  id           String             @id @default(cuid())
+  name         String
+  email        String             @unique
+  passwordHash String
+  role         UserRole           @default(EMPLOYEE)
+
+  organizationId String?
+  organization   Organization?     @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  createdAt    DateTime           @default(now())
+  predictions  StressPrediction[]
+
+  @@index([organizationId])
+}
+
+model StressPrediction {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personality
+  openness          Float
+  conscientiousness Float
+  extraversion      Float
+  agreeableness     Float
+  neuroticism       Float
+
+  // Sleep & wellbeing
+  sleepTime     Float
+  wakeTime      Float
+  sleepDuration Float
+  psqiScore     Float
+  pssScore      Float
+
+  // Communication & screen use
+  callDuration Float
+  numCalls     Int
+  numSms       Int
+  screenOnTime Float
+
+  // Movement & activity
+  skinConductance   Float
+  accelerometer     Float
+  mobilityRadius    Float
+  mobilityDistance Float
+
+  // ML result
+  predictedStressScore Float
+  predictedStressLevel String?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
