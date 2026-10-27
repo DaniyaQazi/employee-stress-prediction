@@ -1,0 +1,565 @@
+/* =========================================================
+   STRESSSENSE — FINAL MODERN DESIGN SYSTEM
+   These rules intentionally come last so the UI has one clear
+   visual hierarchy without changing React functionality.
+   ========================================================= */
+
+:root {
+    --ss-sidebar: 228px;
+    --ss-content: 1080px;
+    --ss-text: #2f2940;
+    --ss-muted: #756d80;
+    --ss-primary: #8257a8;
+    --ss-primary-dark: #68428d;
+    --ss-border: #e8e1eb;
+    --ss-surface: #ffffff;
+    --ss-bg: #f7f5f8;
+    --ss-shadow: 0 10px 30px rgba(52, 38, 66, .065);
+    --ss-shadow-hover: 0 16px 38px rgba(52, 38, 66, .095);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--ss-bg);
+    color: var(--ss-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- shared sizing ---------- */
+
+.card {
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 17px;
+    box-shadow: var(--ss-shadow);
+}
+
+.section-title {
+    gap: 11px;
+    margin-bottom: 18px;
+}
+
+.section-title>span {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    border-radius: 11px;
+    font-size: 18px;
+}
+
+.section-title h2 {
+    font-size: 19px;
+}
+
+.section-title p {
+    font-size: 12px;
+}
+
+/* ---------- public login / register ---------- */
+
+.container {
+    width: min(100% - 32px, var(--ss-content));
+}
+
+.login-card {
+    width: min(100%, 620px) !important;
+    max-width: 620px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.login-card .input-group {
+    margin-top: 14px;
+}
+
+.login-card .input-group:first-of-type {
+    margin-top: 0;
+}
+
+.login-card .actions {
+    margin: 22px 0 12px;
+}
+
+.login-card .result {
+    margin-top: 16px !important;
+}
+
+.privacy {
+    width: min(100%, 620px);
+    padding: 15px 17px;
+    margin-bottom: 15px;
+}
+
+/* ---------- app shell ---------- */
+
+.navbar {
+    width: var(--ss-sidebar);
+    padding: 22px 13px;
+}
+
+.app-content {
+    width: calc(100% - var(--ss-sidebar));
+    margin-left: var(--ss-sidebar);
+    min-width: 0;
+}
+
+.brand {
+    padding: 4px 9px 25px;
+    font-size: 17px;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.nav-item {
+    padding: 10px 11px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.nav-icon {
+    width: 20px;
+    font-size: 15px;
+}
+
+/* ---------- employee pages ---------- */
+
+.app-content>.page-container,
+.app-content>.dashboard-page {
+    width: 100%;
+}
+
+.page-container,
+.dashboard-page {
+    padding: 34px 32px 55px;
+}
+
+.page-header,
+.dashboard-header,
+.dashboard-stats,
+.dashboard-hero-card,
+.dashboard-note,
+.page-container>.card,
+.admin-stats {
+    width: min(100%, var(--ss-content));
+    max-width: var(--ss-content);
+}
+
+.page-header {
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    line-height: 1.12;
+    letter-spacing: -.9px;
+    margin-bottom: 6px;
+}
+
+.page-header>p {
+    font-size: 13px;
+}
+
+.page-container>.card,
+.page-container .card {
+    padding: 22px;
+    border-radius: 18px;
+    margin-bottom: 16px;
+}
+
+/* ---------- employee form ---------- */
+
+.app-content .card:hover {
+    box-shadow: var(--ss-shadow-hover);
+}
+
+.app-content .input-group label {
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.app-content .input-wrapper input:not([type="range"]) {
+    height: 48px;
+    border-radius: 11px;
+    font-size: 14px;
+}
+
+.grid {
+    gap: 18px 20px;
+}
+
+.actions {
+    gap: 9px;
+    margin: 22px 0 27px;
+}
+
+.actions button,
+.predict,
+.dashboard-button {
+    min-height: 45px;
+    padding: 0 18px;
+    border-radius: 11px;
+    font-size: 13px;
+}
+
+.result.success {
+    padding: 20px;
+    border-radius: 17px;
+}
+
+.result.success .result-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 23px;
+}
+
+.result.success strong {
+    font-size: 29px;
+}
+
+/* ---------- employee dashboard ---------- */
+
+.dashboard-header {
+    margin-bottom: 22px;
+}
+
+.dashboard-header h1 {
+    font-size: 40px;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+}
+
+.dashboard-header p {
+    font-size: 14px;
+}
+
+.dashboard-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+    margin-bottom: 17px;
+}
+
+.stat-card {
+    min-width: 0;
+    padding: 17px;
+    border-radius: 17px;
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    font-size: 18px;
+}
+
+.stat-content strong {
+    font-size: 23px;
+}
+
+.stat-content span {
+    font-size: 11px;
+}
+
+.dashboard-hero-card {
+    padding: 24px;
+    border-radius: 19px;
+    margin-bottom: 17px;
+}
+
+.dashboard-hero-card h2 {
+    font-size: 23px;
+}
+
+.dashboard-hero-card p {
+    font-size: 13px;
+}
+
+.dashboard-decoration {
+    width: 78px;
+    height: 78px;
+    flex-basis: 78px;
+    border-radius: 21px;
+    font-size: 33px;
+}
+
+/* ---------- admin ---------- */
+
+.admin-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 13px;
+    margin-bottom: 16px;
+}
+
+.admin-stat-card {
+    min-height: 96px;
+    padding: 16px;
+    gap: 12px;
+    border-radius: 17px;
+}
+
+.admin-stat-icon {
+    width: 42px;
+    height: 42px;
+    flex-basis: 42px;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.admin-stat-card strong {
+    font-size: 24px;
+}
+
+.admin-stat-card span:not(.admin-stat-icon) {
+    font-size: 11px;
+}
+
+.admin-score-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.admin-score-grid>div {
+    min-height: 80px;
+    padding: 14px;
+    border-radius: 13px;
+}
+
+.admin-score-grid span {
+    font-size: 10px;
+}
+
+.admin-score-grid strong {
+    font-size: 22px;
+}
+
+/* Keep the organization code compact even though AdminDashboard
+   currently uses inline styles. */
+
+.page-container .card:first-of-type [style*="padding"] {
+    min-height: 70px;
+}
+
+.page-container .card:first-of-type strong[style*="letter-spacing"] {
+    font-size: 23px !important;
+    letter-spacing: 3px !important;
+}
+
+.page-container .card:first-of-type .predict {
+    min-height: 40px;
+    padding: 0 17px;
+    font-size: 13px;
+}
+
+/* ---------- account chooser ---------- */
+
+.account-type-content {
+    width: min(900px, 100%);
+}
+
+.account-type-content h1 {
+    font-size: 42px;
+    letter-spacing: -1.2px;
+}
+
+.account-type-content>p {
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.account-type-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.account-type-card {
+    min-height: 225px;
+    padding: 22px;
+    border-radius: 18px;
+}
+
+.account-type-icon {
+    width: 47px;
+    height: 47px;
+    margin-bottom: 15px;
+    border-radius: 13px;
+    font-size: 21px;
+}
+
+.account-type-card h2 {
+    font-size: 18px;
+}
+
+.account-type-card p {
+    font-size: 12px;
+}
+
+.account-type-card span {
+    font-size: 12px;
+}
+
+/* ---------- organization/admin auth ---------- */
+
+.organization-form {
+    width: min(500px, 100%);
+    max-width: 500px;
+}
+
+.auth-form {
+    padding: 22px;
+    border-radius: 18px;
+}
+
+.auth-form input {
+    height: 47px;
+    font-size: 14px;
+}
+
+.auth-form label {
+    font-size: 12px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+    :root {
+        --ss-sidebar: 205px;
+    }
+
+    .admin-stats,
+    .dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .account-type-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 760px) {
+
+    .grid,
+    .admin-stats,
+    .admin-score-grid,
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .page-container,
+    .dashboard-page {
+        padding: 27px 18px 45px;
+    }
+
+    .page-header h1 {
+        font-size: 31px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 33px;
+    }
+
+    .dashboard-hero-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-decoration {
+        display: none;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 14px;
+        border-right: 0;
+        border-bottom: 1px solid var(--ss-border);
+    }
+
+    .app-shell {
+        display: block;
+    }
+
+    .app-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .brand {
+        padding: 3px 8px 14px;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .nav-item {
+        width: auto;
+        white-space: nowrap;
+    }
+
+    .nav-bottom {
+        margin-top: 9px;
+        padding-top: 9px;
+    }
+
+    .hero {
+        padding: 42px 18px 76px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .container {
+        width: min(100% - 24px, var(--ss-content));
+    }
+
+    .card,
+    .page-container .card {
+        padding: 19px;
+        border-radius: 17px;
+    }
+
+    .account-type-page {
+        padding: 25px 16px;
+    }
+
+    .account-type-content h1 {
+        font-size: 31px;
+    }
+
+    .account-type-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .account-type-card {
+        min-height: auto;
+    }
+
+    .account-type-card p {
+        min-height: 0;
+    }
+
+    .auth-form {
+        padding: 19px;
+    }
+}

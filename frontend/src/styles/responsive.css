@@ -1,0 +1,142 @@
+/* ---------- Compact StressSense check-in ---------- */
+
+.checkin-page {
+    max-width: 1000px;
+}
+
+.checkin-header {
+    margin-bottom: 20px;
+}
+
+.checkin-header h1 {
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.8px;
+    margin: 8px 0;
+}
+
+.checkin-header p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.checkin-progress {
+    padding: 24px;
+    margin-bottom: 14px;
+    border-radius: 18px;
+}
+
+.checkin-progress-track {
+    margin: 10px 0 22px;
+    height: 6px;
+}
+
+.checkin-step-heading {
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.checkin-step-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 20px;
+}
+
+.checkin-step-heading h2 {
+    font-size: 21px;
+}
+
+.checkin-step-heading p {
+    font-size: 13px;
+}
+
+.checkin-fields {
+    gap: 20px 24px;
+}
+
+.checkin-fields .input-group label {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.checkin-fields .input-group input[type="number"] {
+    min-height: 42px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.checkin-fields small {
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.checkin-field-label {
+    margin-bottom: 7px;
+}
+
+.checkin-question-help {
+    margin: 4px 0 10px;
+    font-size: 12px;
+}
+
+.personality-options {
+    gap: 7px;
+}
+
+.personality-option {
+    gap: 6px;
+    padding: 10px 4px;
+    border-radius: 12px;
+}
+
+.personality-option>span {
+    width: 29px;
+    height: 29px;
+    font-size: 12px;
+}
+
+.personality-option small {
+    font-size: 10px;
+}
+
+.checkin-actions {
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.checkin-actions button {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.checkin-disclaimer {
+    margin: 18px 0;
+    font-size: 12px;
+}
+
+@media (max-width: 640px) {
+    .checkin-progress {
+        padding: 18px;
+    }
+
+    .checkin-fields {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .personality-options {
+        gap: 5px;
+    }
+
+    .personality-option {
+        padding: 9px 2px;
+    }
+
+    .checkin-actions {
+        justify-content: stretch;
+    }
+}

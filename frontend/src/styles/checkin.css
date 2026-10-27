@@ -1,0 +1,225 @@
+.checkin-page {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.checkin-header {
+    margin-bottom: 28px;
+}
+
+.checkin-header h1 {
+    margin: 12px 0 8px;
+}
+
+.checkin-header p,
+.checkin-step-heading p {
+    color: var(--muted, #81768b);
+    line-height: 1.6;
+}
+
+.checkin-progress {
+    padding: clamp(20px, 4vw, 36px);
+}
+
+.checkin-progress-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.checkin-progress-track {
+    height: 7px;
+    margin: 12px 0 30px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #eee8f4;
+}
+
+.checkin-progress-track>div {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #8060ad, #a88bc9);
+    transition: width 180ms ease;
+}
+
+.checkin-step-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.checkin-step-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    place-items: center;
+    border-radius: 16px;
+    background: #f0e7f8;
+    font-size: 23px;
+}
+
+.checkin-step-heading h2 {
+    margin: 0 0 5px;
+}
+
+.checkin-step-heading p {
+    margin: 0;
+}
+
+.checkin-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 28px;
+}
+
+.checkin-field-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.checkin-field-label strong {
+    color: #76539b;
+    font-size: 13px;
+}
+
+.checkin-fields .input-group input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.checkin-fields small {
+    display: block;
+    margin-top: 8px;
+    color: #918897;
+    line-height: 1.5;
+}
+
+.checkin-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.checkin-disclaimer {
+    margin: 24px 0;
+    color: #81768b;
+    font-size: 13px;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .checkin-fields {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 22px;
+    }
+
+    .checkin-actions button {
+        flex: 1;
+    }
+}
+
+.checkin-question-help {
+    margin: 6px 0 14px;
+    color: #81768b;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.personality-options {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.personality-option {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 5px;
+    border: 1px solid #e9e0ee;
+    border-radius: 15px;
+    background: #fffdfa;
+    color: #55485f;
+    cursor: pointer;
+    transition: background 160ms ease, border-color 160ms ease;
+}
+
+.personality-option>span {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border-radius: 50%;
+    background: #f2edf6;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.personality-option small {
+    font-size: 11px;
+    text-align: center;
+}
+
+.personality-option:hover {
+    border-color: #bda5d1;
+    background: #faf6fd;
+}
+
+.personality-option.selected {
+    border-color: #9272b4;
+    background: #eee5f7;
+    color: #624382;
+}
+
+.personality-option.selected>span {
+    background: #8664a9;
+    color: white;
+}
+
+.personality-option:focus-visible {
+    outline: 2px solid #8664a9;
+    outline-offset: 3px;
+}
+
+.checkin-fields .input-group input[type="number"] {
+    width: 100%;
+    min-height: 46px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border: 1px solid #e5dce9;
+    border-radius: 13px;
+    background: #fffdfa;
+    color: #352a3e;
+    font: inherit;
+}
+
+.checkin-fields .input-group input[type="number"]:focus {
+    border-color: #9272b4;
+    outline: 3px solid #eee5f7;
+}
+
+@media (max-width: 520px) {
+    .personality-options {
+        gap: 5px;
+    }
+
+    .personality-option {
+        padding: 10px 2px;
+        border-radius: 11px;
+    }
+
+    .personality-option small {
+        font-size: 9px;
+    }
+}

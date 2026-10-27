@@ -1,3 +1,6 @@
+
+import { useState } from "react";
+
 function StressForm({
     data,
     updateField,
@@ -5,293 +8,209 @@ function StressForm({
     predictStress,
     loading,
 }) {
-    const Slider = ({ label, name, description }) => (
-        <div className="input-group">
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "8px",
-                }}
-            >
-                <label style={{ marginBottom: 0 }}>
-                    {label}
-                </label>
+    const [step, setStep] = useState(0);
 
-                <strong
-                    style={{
-                        color: "#76539b",
-                        fontSize: "12px",
-                    }}
-                >
-                    {data[name]}/10
-                </strong>
-            </div>
+    const steps = [
+        {
+            title: "A little about you",
+            subtitle: "Choose the options that feel closest to you.",
+            icon: "✳",
+        },
+        {
+            title: "Sleep & wellbeing",
+            subtitle: "Tell us about your recent sleep and how you feel.",
+            icon: "☾",
+        },
+        {
+            title: "Your digital routine",
+            subtitle: "A quick look at your daily phone activity.",
+            icon: "▧",
+        },
+        {
+            title: "Movement & activity",
+            subtitle: "Your activity and movement details.",
+            icon: "❋",
+        },
+    ];
 
-            <input
-                type="range"
-                min="0"
-                max="10"
-                step="1"
-                value={data[name]}
-                onChange={(e) =>
-                    updateField(name, e.target.value)
-                }
-            />
+    const fields = [
+        [
+            ["Openness", "Openness", "How comfortable are you with new ideas?"],
+            ["Conscientiousness", "Conscientiousness", "How organized do you usually feel?"],
+            ["Extraversion", "Extraversion", "How energetic do you feel around people?"],
+            ["Agreeableness", "Agreeableness", "How easily do you cooperate with others?"],
+            ["Neuroticism", "Neuroticism", "How sensitive are you to difficult emotions?"],
+        ],
+        [
+            ["Bedtime (hour)", "sleep_time", "24-hour format: 23 means 11 PM.", 1],
+            ["Wake-up time (hour)", "wake_time", "24-hour format: 7 means 7 AM.", 1],
+            ["Hours of sleep", "sleep_duration", "Your approximate total sleep.", 0.1],
+            ["Sleep quality score", "PSQI_score", "Enter your assessment score.", 1],
+            ["Current stress score", "PSS_score", "Use your known score; don't guess.", 1],
+        ],
+        [
+            ["Minutes spent on calls", "call_duration", "Total call duration for the day.", 0.1],
+            ["Number of calls", "num_calls", "Total calls during the day.", 1],
+            ["Number of messages", "num_sms", "Total messages during the day.", 1],
+            ["Screen time (minutes)", "screen_on_time", "Total daily screen-on time.", 0.1],
+        ],
+        [
+            ["Skin conductance", "skin_conductance", "Sensor reading, if available.", 0.1],
+            ["Movement activity", "accelerometer", "Movement sensor reading, if available.", 0.1],
+            ["Movement range", "mobility_radius", "Estimated movement range, if available.", 0.1],
+            ["Movement distance", "mobility_distance", "Estimated distance travelled, if available.", 0.1],
+        ],
+    ];
 
-            <small
-                style={{
-                    display: "block",
-                    marginTop: "7px",
-                    color: "#918897",
-                    fontSize: "10px",
-                }}
-            >
-                {description}
-            </small>
-        </div>
-    );
+    const personalityOptions = [
+        { value: 1, label: "Not much" },
+        { value: 3, label: "A little" },
+        { value: 5, label: "Sometimes" },
+        { value: 7, label: "Quite a bit" },
+        { value: 10, label: "Very much" },
+    ];
 
-    const Input = ({
-        label,
-        name,
-        step = "0.1",
-        description,
-    }) => (
-        <div className="input-group">
-            <label>{label}</label>
+    function changeStep(direction) {
+        setStep((current) =>
+            Math.max(0, Math.min(steps.length - 1, current + direction))
+        );
+    }
 
-            <div className="input-wrapper">
-                <input
-                    type="number"
-                    step={step}
-                    value={data[name]}
-                    onChange={(e) =>
-                        updateField(name, e.target.value)
-                    }
-                />
-            </div>
-
-            {description && (
-                <small
-                    style={{
-                        display: "block",
-                        marginTop: "6px",
-                        color: "#918897",
-                        fontSize: "10px",
-                    }}
-                >
-                    {description}
-                </small>
-            )}
-        </div>
-    );
+    function handleReset() {
+        resetForm();
+        setStep(0);
+    }
 
     return (
-        <>
-            {/* PERSONALITY */}
+        <main className="checkin-page">
+            <header className="checkin-header">
+                <span className="dashboard-eyebrow">A MOMENT FOR YOURSELF</span>
+                <h1>How have you been feeling?</h1>
+                <p>Take a gentle pause. This check-in is about awareness, not judgment.</p>
+            </header>
 
-            <section className="card">
-                <div className="section-title">
-                    <span>🧠</span>
+            <section className="checkin-progress card">
+                <div className="checkin-progress-top">
+                    <span>Step {step + 1} of {steps.length}</span>
+                    <strong>{Math.round(((step + 1) / steps.length) * 100)}%</strong>
+                </div>
 
+                <div
+                    className="checkin-progress-track"
+                    role="progressbar"
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-valuenow={Math.round(((step + 1) / steps.length) * 100)}
+                >
+                    <div style={{ width: `${((step + 1) / steps.length) * 100}%` }} />
+                </div>
+
+                <div className="checkin-step-heading">
+                    <span className="checkin-step-icon">{steps[step].icon}</span>
                     <div>
-                        <h2>Personality</h2>
-                        <p>
-                            Move the sliders to reflect how you
-                            generally feel.
-                        </p>
+                        <h2>{steps[step].title}</h2>
+                        <p>{steps[step].subtitle}</p>
                     </div>
                 </div>
 
-                <div className="grid">
-                    <Slider
-                        label="Openness"
-                        name="Openness"
-                        description="Curiosity and openness to new experiences"
-                    />
+                <div className="checkin-fields">
+                    {fields[step].map(([label, name, description, inputStep]) => (
+                        <div className="input-group" key={name}>
+                            {step === 0 ? (
+                                <>
+                                    <div className="checkin-field-label">
+                                        <label>{label}</label>
+                                        <strong>{data[name]}/10</strong>
+                                    </div>
 
-                    <Slider
-                        label="Conscientiousness"
-                        name="Conscientiousness"
-                        description="Organization and responsibility"
-                    />
+                                    <p className="checkin-question-help">{description}</p>
 
-                    <Slider
-                        label="Extraversion"
-                        name="Extraversion"
-                        description="Social energy and outgoing behaviour"
-                    />
-
-                    <Slider
-                        label="Agreeableness"
-                        name="Agreeableness"
-                        description="Cooperation and empathy"
-                    />
-
-                    <Slider
-                        label="Neuroticism"
-                        name="Neuroticism"
-                        description="Sensitivity to stress and negative emotions"
-                    />
+                                    <div className="personality-options">
+                                        {personalityOptions.map((option) => (
+                                            <button
+                                                key={option.value}
+                                                type="button"
+                                                className={
+                                                    Number(data[name]) === option.value
+                                                        ? "personality-option selected"
+                                                        : "personality-option"
+                                                }
+                                                aria-pressed={Number(data[name]) === option.value}
+                                                onClick={() =>
+                                                    updateField(name, String(option.value))
+                                                }
+                                            >
+                                                <span>{option.value}</span>
+                                                <small>{option.label}</small>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <label htmlFor={name}>{label}</label>
+                                    <input
+                                        id={name}
+                                        type="number"
+                                        min="0"
+                                        step={inputStep}
+                                        value={data[name]}
+                                        onChange={(e) => updateField(name, e.target.value)}
+                                    />
+                                    <small>{description}</small>
+                                </>
+                            )}
+                        </div>
+                    ))}
                 </div>
             </section>
 
-            {/* SLEEP */}
-
-            <section className="card">
-                <div className="section-title">
-                    <span>🌙</span>
-
-                    <div>
-                        <h2>Sleep & Wellbeing</h2>
-                        <p>
-                            Tell us about your recent sleep and
-                            wellbeing.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="grid">
-                    <Input
-                        label="Sleep Time"
-                        name="sleep_time"
-                        step="1"
-                        description="24-hour format, e.g. 23 for 11 PM"
-                    />
-
-                    <Input
-                        label="Wake-up Time"
-                        name="wake_time"
-                        step="1"
-                        description="24-hour format, e.g. 7 for 7 AM"
-                    />
-
-                    <Input
-                        label="Sleep Duration (hours)"
-                        name="sleep_duration"
-                        description="Approximate hours slept"
-                    />
-
-                    <Input
-                        label="Sleep Quality Score"
-                        name="PSQI_score"
-                        step="1"
-                        description="PSQI score"
-                    />
-
-                    <Input
-                        label="Perceived Stress Score"
-                        name="PSS_score"
-                        step="1"
-                        description="Current PSS score"
-                    />
-                </div>
-            </section>
-
-            {/* DIGITAL */}
-
-            <section className="card">
-                <div className="section-title">
-                    <span>📱</span>
-
-                    <div>
-                        <h2>Digital Habits</h2>
-                        <p>
-                            A simple overview of your daily digital
-                            activity.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="grid">
-                    <Input
-                        label="Call Duration (minutes)"
-                        name="call_duration"
-                    />
-
-                    <Input
-                        label="Number of Calls"
-                        name="num_calls"
-                        step="1"
-                    />
-
-                    <Input
-                        label="Number of Messages"
-                        name="num_sms"
-                        step="1"
-                    />
-
-                    <Input
-                        label="Screen-on Time (minutes)"
-                        name="screen_on_time"
-                    />
-                </div>
-            </section>
-
-            {/* MOVEMENT */}
-
-            <section className="card">
-                <div className="section-title">
-                    <span>🚶</span>
-
-                    <div>
-                        <h2>Movement & Activity</h2>
-                        <p>
-                            Activity information used by the
-                            wellbeing prediction model.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="grid">
-                    <Input
-                        label="Skin Conductance"
-                        name="skin_conductance"
-                    />
-
-                    <Input
-                        label="Movement Activity"
-                        name="accelerometer"
-                    />
-
-                    <Input
-                        label="Mobility Radius"
-                        name="mobility_radius"
-                    />
-
-                    <Input
-                        label="Mobility Distance"
-                        name="mobility_distance"
-                    />
-                </div>
-            </section>
-
-            {/* ACTIONS */}
-
-            <div className="actions">
+            <div className="checkin-actions">
                 <button
+                    type="button"
                     className="reset"
-                    type="button"
-                    onClick={resetForm}
+                    onClick={handleReset}
                     disabled={loading}
                 >
-                    Reset
+                    Start over
                 </button>
 
-                <button
-                    className="predict"
-                    type="button"
-                    onClick={predictStress}
-                    disabled={loading}
-                >
-                    {loading
-                        ? "Checking..."
-                        : "Check My Wellbeing →"}
-                </button>
+                {step > 0 && (
+                    <button
+                        type="button"
+                        className="reset"
+                        onClick={() => changeStep(-1)}
+                        disabled={loading}
+                    >
+                        ← Back
+                    </button>
+                )}
+
+                {step < steps.length - 1 ? (
+                    <button
+                        type="button"
+                        className="predict"
+                        onClick={() => changeStep(1)}
+                        disabled={loading}
+                    >
+                        Continue →
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        className="predict"
+                        onClick={predictStress}
+                        disabled={loading}
+                    >
+                        {loading ? "Checking..." : "See my results →"}
+                    </button>
+                )}
             </div>
-        </>
+
+            <p className="checkin-disclaimer">
+                Your result is an estimate for personal awareness, not a medical diagnosis.
+            </p>
+        </main>
     );
 }
 
